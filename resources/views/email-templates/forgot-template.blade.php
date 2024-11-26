@@ -65,6 +65,10 @@
     <div class="content">
       <p>Hello, {{ $user->name }}</p>
       <a href="{{ $actionlink }}" target="_blank" class="btn">Reset Password</a>
+      <p>
+        This link is valid for 15 Mins.
+      </p>
+
       <p>If you did not request this, you can safely ignore this email.</p>
     </div>
 

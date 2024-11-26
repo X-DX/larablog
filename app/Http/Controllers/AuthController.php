@@ -151,6 +151,14 @@ class AuthController extends Controller
         if(!$isTokenExists){
             return redirect()->route('admin.forgot')->with('fail','Invalid token. Request another reset password link');
         }else{
+            // check if token is not expired (15 min)
+            $diffMins = Carbon::createFromFormat('Y-m-d H:i:s',$isTokenExists->created_at)->diffInMinutes(Carbon::now());
+            if($diffMins>15){
+                // when token is older than 15 min
+                return redirect()->route('admin.forgot')->with('fail','The Password reset link you clicked has expired. Please request a new link.');
+            }
+
+
             $data = [
                 'pagesTitle' => 'Password Reset',
                 'token' => $token,
