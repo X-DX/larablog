@@ -2,7 +2,7 @@
 
 
 ## Step 1
-Installation
+Installation (using brew)
 - PHP 8.4
 - Composer
 - Mysql
