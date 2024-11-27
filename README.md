@@ -32,5 +32,6 @@ Setup Environment
 - Handeling Experied Password reset link
 
 ## Step 7
-- Setup User Profile
+- Setup User Profile page
+- Edit profile
 
