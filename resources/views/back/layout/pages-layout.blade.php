@@ -37,7 +37,9 @@
 		rel="stylesheet"
 		type="text/css"
 		href="/back/vendors/styles/icon-font.min.css" />
-	<link rel="stylesheet" href="/extra-assets/ijabo/ijabo.min.css">
+
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	@livewireScripts
 	<link rel="stylesheet" type="text/css" href="/back/vendors/styles/style.css" />
 	@stack('stylesheets')
 </head>
@@ -445,7 +447,7 @@
 	<script src="/back/vendors/scripts/process.js"></script>
 	<script src="/back/vendors/scripts/layout-settings.js"></script>
 	<script src="/extra-assets/ijabo/ijabo.min.js"></script>
-	<script>
+	{{-- <script>
 		window.addEventListener('showToastr', function(event){
 			$().notifa({
 				vers:1,
@@ -454,7 +456,32 @@
 				delay:2500
 			});
 		});
+	</script> --}}
+	<script>
+		window.addEventListener('showSweetAlert', event => { 
+			swal.fire({
+				title: event.detail[0].message,
+				icon: event.detail[0].type,
+				});
+			});
+
+			window.addEventListener('showSweetAlert', event => { 
+			swal.fire({
+				title: event.detail[0].message,
+				icon: event.detail[0].type,
+				buttons: true,
+				dangerMode: true,
+			})
+
+			.then((willDelete) => {
+				if (willDelete) {
+					window.livewire.emit('remove');
+				}
+			});
+
+		});
 	</script>
+
 
 	@stack('script')
 </body>

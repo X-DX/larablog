@@ -5,13 +5,19 @@ namespace App\Livewire\Admin;
 use Livewire\Component;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
+
+use function Illuminate\Log\log;
 
 class Profile extends Component
 {
+    use LivewireAlert;
     public $tab = null;
     public $tabname = 'personal_details';
     protected $queryString = ['tab' => ['keep'=>true]];
     public $name, $email, $username, $bio;
+
+    
 
     public function selectTab($tab){
         $this->tab = $tab;
@@ -45,12 +51,14 @@ class Profile extends Component
 
         // display message
         if($updated){
-            $this->dispatch('showToastr',['type'=>'success','message'=>'Your personal details have been updated successfully.']);
+            $this->dispatch('showSweetAlert',['type'=>'success','message'=>'Your personal details have been updated successfully.']);
+    
             $this->dispatch('updateTopUserInfo')->to(TopUserInfo::class);
         }else{
-            $this->dispatch('showToastr',['type'=>'error','message'=>'Something went wrong.']);
+            $this->dispatch('showSweetAlert',['type'=>'error','message'=>'Something went wrong.']);
         }
     }
+
 
     public function render()
     {

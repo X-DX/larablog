@@ -33,5 +33,9 @@ Setup Environment
 
 ## Step 7
 - Setup User Profile page
-- Edit profile
+- Edit profile  
+- add sweetalert with livewire
+
+## Step 8
+- crop and update (profile pictute)
 
