@@ -16,4 +16,6 @@ class TopUserInfo extends Component
             'user' => User::findOrFail(auth()->id())
         ]);
     }
+
+    
 }

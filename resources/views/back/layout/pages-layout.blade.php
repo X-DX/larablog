@@ -5,7 +5,8 @@
 	<!-- Basic Page Info -->
 	<meta charset="utf-8" />
 	<title>@yield('pageTitle')</title>
-
+	<meta name="csrf-token" content="{{ csrf_token() }}">
+	
 	<!-- Site favicon -->
 	<link
 		rel="apple-touch-icon"
@@ -42,6 +43,7 @@
 	@livewireScripts
 	<link rel="stylesheet" type="text/css" href="/back/vendors/styles/style.css" />
 	@stack('stylesheets')
+	@kropifyStyles
 </head>
 
 <body>
@@ -457,6 +459,7 @@
 			});
 		});
 	</script> --}}
+	@kropifyScripts
 	<script>
 		window.addEventListener('showSweetAlert', event => { 
 			swal.fire({
@@ -473,17 +476,12 @@
 				dangerMode: true,
 			})
 
-			.then((willDelete) => {
-				if (willDelete) {
-					window.livewire.emit('remove');
-				}
-			});
-
 		});
 	</script>
 
 
 	@stack('script')
+	
 </body>
 
 </html>

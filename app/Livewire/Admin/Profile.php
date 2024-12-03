@@ -17,7 +17,9 @@ class Profile extends Component
     protected $queryString = ['tab' => ['keep'=>true]];
     public $name, $email, $username, $bio;
 
-    
+    protected $listeners = [
+        'updateProfile' => '$refresh'
+    ];
 
     public function selectTab($tab){
         $this->tab = $tab;
