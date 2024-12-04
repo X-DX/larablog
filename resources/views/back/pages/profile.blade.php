@@ -43,6 +43,7 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
         success: function(data) {
+            // console.log(data);
             if (data.status == 1) {
                 Livewire.dispatch('updateTopUserInfo',[]);
                 Livewire.dispatch('updateProfile',[]);

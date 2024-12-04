@@ -39,3 +39,6 @@ Setup Environment
 ## Step 8
 - crop and update (profile pictute)
 
+## Step 9
+- Implement Secure Password Update Feature
+

@@ -47,6 +47,8 @@ class AdminController extends Controller
         //         'mime_type' => $file->getMimeType(),
         //     ] : null,
         //     'filename' => $filename,
+        //     'old_picture' => $old_picture,
+        //     'path' => public_path($path.$old_picture)
         // ]);
 
 
