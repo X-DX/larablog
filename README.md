@@ -42,3 +42,6 @@ Setup Environment
 ## Step 9
 - Implement Secure Password Update Feature
 
+## Step 10
+- Prevent browser back history
+
