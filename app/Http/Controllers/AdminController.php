@@ -38,6 +38,7 @@ class AdminController extends Controller
         $file = $request->file('profilePictureFile');
         $old_picture = $user->getAttributes()['picture'];
         $filename = 'IMG_' . uniqid() . '.png';
+
         // return response()->json([
         //     'status' => 0,
         //     'message' => 'Something went wrong',
@@ -50,8 +51,6 @@ class AdminController extends Controller
         //     'old_picture' => $old_picture,
         //     'path' => public_path($path.$old_picture)
         // ]);
-
-
 
         $upload = Kropify::getFile($file, $filename)->maxWoH(255)->save($path);
 
@@ -66,5 +65,12 @@ class AdminController extends Controller
         }else{
             return response()->json(['status'=>0,'message'=>'Something went wrong']);
         }
+    }
+
+    public function generalSettings(Request $request){
+        $data = [
+            'pagesTitle' => 'General Settings'
+        ];
+        return view('back.pages.general_settings',$data);
     }
 }

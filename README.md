@@ -47,3 +47,6 @@ Setup Environment
 
 ## Step 11 
 - Update Admin Social Links section
+
+## Step 12
+- General Settings: Update Site Title, Email, Meta Keywords
