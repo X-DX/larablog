@@ -45,3 +45,5 @@ Setup Environment
 ## Step 10
 - Prevent browser back history
 
+## Step 11 
+- Update Admin Social Links section
