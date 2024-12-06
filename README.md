@@ -50,3 +50,6 @@ Setup Environment
 
 ## Step 12
 - General Settings: Update Site Title, Email, Meta Keywords
+
+## Step 13
+- Change Site Logo
