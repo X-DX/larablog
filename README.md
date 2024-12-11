@@ -53,3 +53,6 @@ Setup Environment
 
 ## Step 13
 - Change Site Logo
+
+## Step 14
+- Site Favicon

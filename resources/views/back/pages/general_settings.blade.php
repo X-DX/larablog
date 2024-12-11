@@ -28,22 +28,7 @@
 
 @push('script')
 <script>
-    // $('input[type="file"][name="site_logo"]').ijaboViewer({
-    //     preview:'#preview_site_logo',
-    //     imageShape:'rectangular',
-    //     allowedExtensions:['png','jpg'],
-    //     onErrorShape: function(message, element){
-    //         alert(message);
-    //     },
-    //     onInvalidType: function(message, element){
-    //         alert(message);
-    //     },
-    //     onSuccess: function(message, element){
-
-    //     }
-    // });
-
-    
+    // Logo preview and ajax
         $('input[type="file"][name="site_logo"]').on('change', function () {
             const file = this.files[0];
             const preview = $('#preview_site_logo');
@@ -103,6 +88,79 @@
                         }
                         
                         $('img.site_logo').each(function(){
+                            $(this).attr('src','/'+data.image_path)
+                        });
+                        
+
+                    }
+                });
+            }else{
+                errorElement.text('Please, Select an image file');
+            }
+        });
+
+    // Favicon preview and ajax
+    $('input[type="file"][name="site_favicon"]').on('change', function () {
+        const file = this.files[0];
+        const preview = $('#preview_site_favicon');
+        const allowedExtensions = ['png', 'jpg'];
+
+        if (file) {
+            const fileExtension = file.name.split('.').pop().toLowerCase();
+
+            if (!allowedExtensions.includes(fileExtension)) {
+                alert('Invalid file type! Please upload a PNG or JPG file.');
+                $(this).val(''); // Clear the input
+                preview.hide(); // Hide the preview
+                return;
+            }
+
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                preview.attr('src', e.target.result).show(); // Set the image and show the preview
+            };
+
+            reader.readAsDataURL(file);
+        } else {
+            preview.hide(); // Hide the preview if no file is selected
+        }
+    });
+
+    $('#updateFaviconForm').submit(function(e){
+            e.preventDefault();
+            var form = this;
+            var inputVal = $(form).find('input[type="file"]').val();
+            var errorElement = $(form).find('span.text-danger');
+            errorElement.text('');
+
+            if(inputVal.length > 0){
+                $.ajax({
+                    url:$(form).attr('action'),
+                    method:$(form).attr('method'),
+                    data:new FormData(form),
+                    processData:false,
+                    dataType:'json',
+                    contentType:false,
+                    beforeSend:function(){},
+                    success:function(data){
+                        if(data.status == 1){
+                            $(form)[0].reset();
+                            var linkElement = document.querySelector('link[rel="icon"]');
+                            linkElement.href='/'+data.image_path;
+                            swal.fire({
+                                title: data.message,
+                                icon: "success",
+                            });
+                        }else{
+                            
+                            swal.fire({
+                                title: data.message,
+                                icon: "error",
+                            });
+                        }
+                        
+                        $('img.site_favicon').each(function(){
                             $(this).attr('src','/'+data.image_path)
                         });
                         
