@@ -70,9 +70,9 @@
                         <div class="col-md-6">
                             <h6>Site Logo</h6>
                             <div class="mb-2 mt-1" style="max-width:200px">
-                                <img wire:ignore src="" alt="" class="img-thumbnail" data-ijabo-default-img="" id="preview_site_logo">
+                                <img wire:ignore src="/images/site/{{ isset(settings()->site_logo) ? settings()->site_logo : '' }}" alt="" class="img-thumbnail"  id="preview_site_logo">
                             </div>
-                            <form action="" method="POST" enctype="multipart/form-data" id="updateLogoForm">
+                            <form action="{{ route('admin.update_logo') }}" method="post" enctype="multipart/form-data" id="updateLogoForm">
                                 @csrf
                                 <div class="mb-2">
                                     <input type="file" name="site_logo" id="" class="form-control">

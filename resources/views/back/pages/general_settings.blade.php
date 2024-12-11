@@ -28,41 +28,92 @@
 
 @push('script')
 <script>
-    $(document).ready(function() {
-        $('input[type="file"][name="site_logo"]').on('change', function(event) {
-            const fileInput = $(this); // Get the file input element
-            const preview = $('#preview_site_logo'); // Get the preview image element
-            const file = event.target.files[0]; // Get the selected file
+    // $('input[type="file"][name="site_logo"]').ijaboViewer({
+    //     preview:'#preview_site_logo',
+    //     imageShape:'rectangular',
+    //     allowedExtensions:['png','jpg'],
+    //     onErrorShape: function(message, element){
+    //         alert(message);
+    //     },
+    //     onInvalidType: function(message, element){
+    //         alert(message);
+    //     },
+    //     onSuccess: function(message, element){
 
-            // Clear previous preview if any
-            preview.attr('src', '');
+    //     }
+    // });
+
+    
+        $('input[type="file"][name="site_logo"]').on('change', function () {
+            const file = this.files[0];
+            const preview = $('#preview_site_logo');
+            const allowedExtensions = ['png', 'jpg'];
 
             if (file) {
-                // Validate file type
-                const validExtensions = ['image/png', 'image/jpeg'];
-                if (!validExtensions.includes(file.type)) {
-                    alert('Only PNG and JPG files are allowed.');
-                    fileInput.val(''); // Reset the input value
+                const fileExtension = file.name.split('.').pop().toLowerCase();
+
+                if (!allowedExtensions.includes(fileExtension)) {
+                    alert('Invalid file type! Please upload a PNG or JPG file.');
+                    $(this).val(''); // Clear the input
+                    preview.hide(); // Hide the preview
                     return;
                 }
 
-                // Validate file size (optional, e.g., max 2MB)
-                const maxSize = 2 * 1024 * 1024; // 2MB
-                if (file.size > maxSize) {
-                    alert('File size must not exceed 2MB.');
-                    fileInput.val(''); // Reset the input value
-                    return;
-                }
+                const reader = new FileReader();
 
-                // Create image preview
-                const fileReader = new FileReader();
-                fileReader.onload = function(e) {
-                    preview.attr('src', e.target.result); // Set the image preview
+                reader.onload = function (e) {
+                    preview.attr('src', e.target.result).show(); // Set the image and show the preview
                 };
-                fileReader.readAsDataURL(file); // Read the file
+
+                reader.readAsDataURL(file);
+            } else {
+                preview.hide(); // Hide the preview if no file is selected
             }
         });
-    });
+    
+        $('#updateLogoForm').submit(function(e){
+            e.preventDefault();
+            var form = this;
+            var inputVal = $(form).find('input[type="file"]').val();
+            var errorElement = $(form).find('span.text-danger');
+            errorElement.text('');
+
+            if(inputVal.length > 0){
+                $.ajax({
+                    url:$(form).attr('action'),
+                    method:$(form).attr('method'),
+                    data:new FormData(form),
+                    processData:false,
+                    dataType:'json',
+                    contentType:false,
+                    beforeSend:function(){},
+                    success:function(data){
+                        if(data.status == 1){
+                            $(form)[0].reset();
+                            swal.fire({
+                                title: data.message,
+                                icon: "success",
+                            });
+                        }else{
+                            
+                            swal.fire({
+                                title: data.message,
+                                icon: "error",
+                            });
+                        }
+                        
+                        $('img.site_logo').each(function(){
+                            $(this).attr('src','/'+data.image_path)
+                        });
+                        
+
+                    }
+                });
+            }else{
+                errorElement.text('Please, Select an image file');
+            }
+        });
+
 </script>
 
 @endpush
