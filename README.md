@@ -61,3 +61,8 @@ Setup Environment
 - Categories Page
 - install laravel slug package (https://github.com/cviebrock/eloquent-sluggable)
 
+## Step 16
+- Add Parent Category
+- convert add cetegory component into livewire
+- add parent category to DB
+- show it from db
