@@ -131,4 +131,11 @@ class AdminController extends Controller
             return response()->json(['status' => 0, 'message' => 'Make sure you updated general settings tab first.']);
         }
     }
+
+    public function categoriesPage(Request $request){
+        $data = [
+            'pagesTitle' => 'Manage categories'
+        ];
+        return view('back.pages.categories_page',$data);
+    }
 }

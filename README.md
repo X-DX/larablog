@@ -56,3 +56,8 @@ Setup Environment
 
 ## Step 14
 - Site Favicon
+
+## Step 15
+- Categories Page
+- install laravel slug package (https://github.com/cviebrock/eloquent-sluggable)
+

@@ -360,7 +360,7 @@
 					</li>
 
 					<li>
-						<a href="" class="dropdown-toggle no-arrow">
+						<a href="{{ route('admin.categories') }}" class="dropdown-toggle no-arrow">
 							<span class="micon fa fa-th-list"></span><span class="mtext">Categories</span>
 						</a>
 					</li>
