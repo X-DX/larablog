@@ -11,7 +11,8 @@ class Categories extends Component
     public $isUpdateParentCategoryMode = false;
     public $pcategory_id, $pcategory_name;
     protected $listeners = [
-        'updateCategoryOrdering'
+        'updateCategoryOrdering',
+        'deleteCategoryAction'
     ];
 
     public function addParentCategory(){
@@ -92,6 +93,24 @@ class Categories extends Component
                 'ordering' => $new_position
             ]);
             $this->dispatch('showSweetAlert',['type'=>'success','message'=>'Parent Categories ordering have been updated successfully.']);
+        }
+    }
+
+    public function deleteParentCategory($id){
+        $this->dispatch('deleteParentCategory',['id'=>$id]);
+    }
+
+    public function deleteCategoryAction($id){
+        $pcategory = ParentCategory::findOrFail($id);
+        
+        // check if this parent category as childern
+
+        // Delete parent category
+        $delete = $pcategory->delete();
+        if( $delete ){
+            $this->dispatch('showSweetAlert',['type'=>'success','message'=>'Parent Category has been deleted Successfully.']);
+        }else{
+            $this->dispatch('showSweetAlert',['type'=>'error','message'=>'Something went wrong.']);
         }
     }
 

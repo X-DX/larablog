@@ -30,5 +30,40 @@
                 Livewire.dispatch('updateCategoryOrdering',[positions]);
             }
         });
+
+        window.addEventListener('deleteParentCategory', function(event) {
+        var id = event.detail[0].id;
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'You want to delete this parent category.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, Delete',
+            cancelButtonText: 'Cancel',
+            cancelButtonColor: '#d33',
+            confirmButtonColor: '#3085d6',
+            allowOutsideClick: false,
+            customClass: {
+                popup: 'font-size-1rem', // Optional: Define your custom CSS class
+            },
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Trigger the Livewire action if the user confirms
+                Livewire.dispatch('deleteCategoryAction', [id]);
+
+                // Optionally show a confirmation message
+                Swal.fire(
+                    'Deleted!',
+                    'The parent category has been deleted.',
+                    'success'
+                );
+            }
+        });
+    });
+
+
+
+
     </script>
 @endpush
