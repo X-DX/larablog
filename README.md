@@ -66,3 +66,6 @@ Setup Environment
 - convert add cetegory component into livewire
 - add parent category to DB
 - show it from db
+
+## Step 17
+- update parent category
