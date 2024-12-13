@@ -69,3 +69,8 @@ Setup Environment
 
 ## Step 17
 - update parent category
+
+## Step 18
+- Reorder & Sort Parent Categories (like drag and drop the order)
+- need jquery ui (https://jqueryui.com/) and downloard, placed in extra-assets
+- store the order in db.
