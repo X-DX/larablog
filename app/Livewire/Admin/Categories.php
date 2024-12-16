@@ -10,6 +10,9 @@ class Categories extends Component
 {
     public $isUpdateParentCategoryMode = false;
     public $pcategory_id, $pcategory_name;
+    public $isUpdateCategoryMode = false;
+    public $category_id, $parent = 0, $category_name;
+
     protected $listeners = [
         'updateCategoryOrdering',
         'deleteCategoryAction'
@@ -102,13 +105,56 @@ class Categories extends Component
 
     public function deleteCategoryAction($id){
         $pcategory = ParentCategory::findOrFail($id);
-        
+
         // check if this parent category as childern
 
         // Delete parent category
         $delete = $pcategory->delete();
         if( $delete ){
             $this->dispatch('showSweetAlert',['type'=>'success','message'=>'Parent Category has been deleted Successfully.']);
+        }else{
+            $this->dispatch('showSweetAlert',['type'=>'error','message'=>'Something went wrong.']);
+        }
+    }
+
+    public function addCategory(){
+        // dd("Data");
+        $this->category_id = null;
+        $this->parent = 0;
+        $this->category_name = null;
+        $this->isUpdateCategoryMode = false;
+        $this->showCategoryModalForm();
+    }
+
+    public function showCategoryModalForm(){
+        $this->resetErrorBag();
+        $this->dispatch('showCategoryModalForm');
+    }
+
+    public function hideCategoryModalForm(){
+        $this->dispatch('hideCategoryModalForm');
+        $this->isUpdateCategoryMode = false;
+        $this->category_id = $this->category_name = null;
+        $this->parent = 0;
+    }
+
+    public function createCategory(){
+        $this->validate([
+            'category_name' => 'required|unique:categories,name'
+        ],[
+            'category_name.required' => 'Category field is required',
+            'category_name.unique' => 'Category name is already exists.'
+        ]);
+
+        // store new category
+        $category = new Category();
+        $category->parent = $this->parent;
+        $category->name = $this->category_name;
+        $saved = $category->save();
+
+        if($saved){
+            $this->hideCategoryModalForm();
+            $this->dispatch('showSweetAlert',['type'=>'success','message'=>'New Category has been created Successfully.']);
         }else{
             $this->dispatch('showSweetAlert',['type'=>'error','message'=>'Something went wrong.']);
         }

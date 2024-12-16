@@ -13,6 +13,14 @@
             $('#pcategory_modal').modal('hide');
         });
 
+        window.addEventListener('showCategoryModalForm', function(){
+            $('#category_modal').modal('show');
+        });
+
+        window.addEventListener('hideCategoryModalForm', function(){
+            $('#category_modal').modal('hide');
+        });
+
         $('table tbody#sortable_parent_categories').sortable({
             cursor:"move",
             update: function(event, ui){

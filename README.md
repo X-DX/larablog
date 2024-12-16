@@ -77,3 +77,8 @@ Setup Environment
 
 ## Step 19
 - Delete Parent Category
+
+## Step 20
+- Add Category
+- save in db
+- show from db
