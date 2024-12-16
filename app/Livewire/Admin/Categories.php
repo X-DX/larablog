@@ -163,7 +163,8 @@ class Categories extends Component
     public function render()
     {
         return view('livewire.admin.categories',[
-            'pcategories' => ParentCategory::orderBy('ordering','asc')->get()
+            'pcategories' => ParentCategory::orderBy('ordering','asc')->get(),
+            'categories' => Category::orderBy('ordering','asc')->get()
         ]);
     }
 }
