@@ -82,3 +82,4 @@ Setup Environment
 - Add Category
 - save in db
 - show from db
+- Update Category

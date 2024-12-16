@@ -99,7 +99,7 @@
                                 <td>-</td>
                                 <td>
                                     <div class="table-actions">
-                                        <a href="" class="text-primary mx-2">
+                                        <a href="javascript:;" wire:click="editCategory({{$item->id}})" class="text-primary mx-2">
                                             <i class="dw dw-edit2"></i>
                                         </a>
                                         <a href="" class="text-danger mx-2">
