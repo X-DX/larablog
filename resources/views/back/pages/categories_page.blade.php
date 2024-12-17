@@ -35,7 +35,7 @@
                     $(this).removeClass('updated');
                 });
                 // alert(positions);
-                Livewire.dispatch('updateCategoryOrdering',[positions]);
+                Livewire.dispatch('updateParentCategoryOrdering',[positions]);
             }
         });
 
@@ -55,20 +55,38 @@
             customClass: {
                 popup: 'font-size-1rem', // Optional: Define your custom CSS class
             },
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // Trigger the Livewire action if the user confirms
-                Livewire.dispatch('deleteCategoryAction', [id]);
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Trigger the Livewire action if the user confirms
+                    Livewire.dispatch('deleteCategoryAction', [id]);
 
-                // Optionally show a confirmation message
-                Swal.fire(
-                    'Deleted!',
-                    'The parent category has been deleted.',
-                    'success'
-                );
+                    // Optionally show a confirmation message
+                    Swal.fire(
+                        'Deleted!',
+                        'The parent category has been deleted.',
+                        'success'
+                    );
+                }
+            });
+        });
+
+        $('table tbody#sortable_categories').sortable({
+            cursor:"move",
+            update: function(event, ui){
+                $(this).children().each(function(index){
+                    if( $(this).attr('data-ordering') != (index + 1) ){
+                        $(this).attr('data-ordering', (index+1)).addClass('updated');
+                    }
+                });
+                var positions = [];
+                $('.updated').each(function(){
+                    positions.push([$(this).attr('data-index'),$(this).attr('data-ordering')]);
+                    $(this).removeClass('updated');
+                });
+                // alert(positions);
+                Livewire.dispatch('updateCategoryOrdering',[positions]);
             }
         });
-    });
 
 
 

@@ -83,3 +83,4 @@ Setup Environment
 - save in db
 - show from db
 - Update Category
+- Reorder category
