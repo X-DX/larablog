@@ -84,3 +84,4 @@ Setup Environment
 - show from db
 - Update Category
 - Reorder category
+- Delete Category
