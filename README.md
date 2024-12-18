@@ -85,3 +85,8 @@ Setup Environment
 - Update Category
 - Reorder category
 - Delete Category
+
+## Step 21
+- multiple pagination links on single page.
+- delete parent category, then the child category will be independent
+- active class in side bar menu.
