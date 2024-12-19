@@ -90,3 +90,7 @@ Setup Environment
 - multiple pagination links on single page.
 - delete parent category, then the child category will be independent
 - active class in side bar menu.
+
+## Step 22
+- Restrict Certain routes with middleware
+- normal will not able to access category, shop and general

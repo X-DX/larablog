@@ -363,11 +363,13 @@
 						</a>
 					</li>
 
+					@if(auth()->user()->type == 'superAdmin')
 					<li>
 						<a href="{{ route('admin.categories') }}" class="dropdown-toggle no-arrow {{ Route::is('admin.categories') ? 'active' : '' }}">
 							<span class="micon fa fa-th-list"></span><span class="mtext">Categories</span>
 						</a>
 					</li>
+					@endif
 
 					<li class="dropdown">
 						<a href="javascript:;" class="dropdown-toggle">
@@ -378,6 +380,8 @@
 							<li><a href="">Posts</a></li>
 						</ul>
 					</li>
+
+					@if(auth()->user()->type == 'superAdmin')
 					<li class="dropdown">
 						<a href="javascript:;" class="dropdown-toggle">
 							<span class="micon fa fa-shopping-bag"></span><span class="mtext">Shop</span>
@@ -387,6 +391,7 @@
 							<li><a href="">All Products</a></li>
 						</ul>
 					</li>
+					@endif
 					
 					<li>
 						<a href="invoice.html" class="dropdown-toggle no-arrow">
@@ -409,6 +414,7 @@
 						</a>
 					</li>
 
+					@if(auth()->user()->type == 'superAdmin')
 					<li>
 						<a
 							href="{{ route('admin.settings') }}"
@@ -417,6 +423,8 @@
 							<span class="mtext">General</span>
 						</a>
 					</li>
+					@endif
+					
 				</ul>
 			</div>
 		</div>
