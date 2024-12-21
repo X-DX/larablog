@@ -94,3 +94,6 @@ Setup Environment
 ## Step 22
 - Restrict Certain routes with middleware
 - normal will not able to access category, shop and general
+
+## Step 23
+- Post CRUD (Add Posts)
