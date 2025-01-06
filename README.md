@@ -2,98 +2,107 @@
 
 
 ## Step 1
-Installation (using brew)
-- PHP 8.4
-- Composer
-- Mysql
-- phpmyadmin
-- VS Code
-- apache server
+    Installation (using brew)
+    - PHP 8.4
+    - Composer
+    - Mysql
+    - phpmyadmin
+    - VS Code
+    - apache server
 
 ## Step 2
-Setup Environment
-- install project
-- setup .env file and connect DB
-- create DB in phpmyadmin
+    Setup Environment
+    - install project
+    - setup .env file and connect DB
+    - create DB in phpmyadmin
 
 ## Step 3
-- setup folder structure
-- integrate Admin Template
+    - setup folder structure
+    - integrate Admin Template
 
 ## Step 4
-- implement Admin Auth
-- Secure Admin route
+    - implement Admin Auth
+    - Secure Admin route
 
 ## Step 5
-- Forgot Password
-- Reset Password (PHPMailer, Mailtrap)
+    - Forgot Password
+    - Reset Password (PHPMailer, Mailtrap)
 
 ## Step 6
-- Handeling Experied Password reset link
+    - Handeling Experied Password reset link
 
 ## Step 7
-- Setup User Profile page
-- Edit profile  
-- add sweetalert with livewire
+    - Setup User Profile page
+    - Edit profile  
+    - add sweetalert with livewire
 
 ## Step 8
-- crop and update (profile pictute)
+    - crop and update (profile pictute)
 
 ## Step 9
-- Implement Secure Password Update Feature
+    - Implement Secure Password Update Feature
 
 ## Step 10
-- Prevent browser back history
+    - Prevent browser back history
 
 ## Step 11 
-- Update Admin Social Links section
+    - Update Admin Social Links section
 
 ## Step 12
-- General Settings: Update Site Title, Email, Meta Keywords
+    - General Settings: Update Site Title, Email, Meta Keywords
 
 ## Step 13
-- Change Site Logo
+    - Change Site Logo
 
 ## Step 14
-- Site Favicon
+    - Site Favicon
 
 ## Step 15
-- Categories Page
-- install laravel slug package (https://github.com/cviebrock/eloquent-sluggable)
+    - Categories Page
+    - install laravel slug package (https://github.com/cviebrock/eloquent-sluggable)
 
 ## Step 16
-- Add Parent Category
-- convert add cetegory component into livewire
-- add parent category to DB
-- show it from db
+    - Add Parent Category
+    - convert add cetegory component into livewire
+    - add parent category to DB
+    - show it from db
 
 ## Step 17
-- update parent category
+    - update parent category
 
 ## Step 18
-- Reorder & Sort Parent Categories (like drag and drop the order)
-- need jquery ui (https://jqueryui.com/) and downloard, placed in extra-assets
-- store the order in db.
+    - Reorder & Sort Parent Categories (like drag and drop the order)
+    - need jquery ui (https://jqueryui.com/) and downloard, placed in extra-assets
+    - store the order in db.
 
 ## Step 19
-- Delete Parent Category
+    - Delete Parent Category
 
 ## Step 20
-- Add Category
-- save in db
-- show from db
-- Update Category
-- Reorder category
-- Delete Category
+    - Add Category
+    - save in db
+    - show from db
+    - Update Category
+    - Reorder category
+    - Delete Category
 
 ## Step 21
-- multiple pagination links on single page.
-- delete parent category, then the child category will be independent
-- active class in side bar menu.
+    - multiple pagination links on single page.
+    - delete parent category, then the child category will be independent
+    - active class in side bar menu.
 
 ## Step 22
-- Restrict Certain routes with middleware
-- normal will not able to access category, shop and general
+    - Restrict Certain routes with middleware
+    - normal will not able to access category, shop and general
 
 ## Step 23
-- Post CRUD (Add Posts)
+    - Post CRUD (Add Posts)
+    - creare new controller to manage new post
+    - create route for add, submit post and show all post.
+    - create a form to add post
+    - Featured Image Preview
+    - Active bootstrap.tagsinput for input (add css, js link)
+    - Create a Post Model
+    - use Sluggable package
+    - run migrate command
+    - submit form data using ajax 

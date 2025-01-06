@@ -24,8 +24,9 @@
     </div>
 </div>
 
+{{-- This form is for post the Posts --}}
 <form action="{{ route('admin.create_post') }}" method="POST" autocomplete="off" enctype="multipart/form-data" id="addPostForm">
-    @csrf
+@csrf
     <div class="row">
         <div class="col-md-9">
             <div class="card card-box mb-2">
@@ -61,7 +62,9 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label for=""><b>Post Category</b>:</label>
+
                         <select name="category" id="" class="custom-select form-control">
+                            <option value="">Choose....</option>
                             {!! $categories_html !!}
                         </select>
                         <span class="text-danger error-text category_error"></span>
@@ -79,7 +82,7 @@
 
                     <div class="form-group">
                         <label for=""><b>Tags</b>:</label>
-                        <input type="text" class="form-control" name="tags"> 
+                        <input type="text" class="form-control" name="tags" data-role="tagsinput"> 
                     </div>
 
                     <hr>
@@ -104,3 +107,96 @@
     </div>
 </form>
 @endsection
+
+@push('stylesheets')
+    <link rel="stylesheet" href="/back/src/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css">
+@endpush
+
+@push('script')
+<script src="/back/src/plugins/bootstrap-tagsinput/bootstrap-tagsinput.js"></script>
+<script>
+    // Logo preview and ajax
+    $('input[type="file"][name="featured_image"]').on('change', function () {
+        const file = this.files[0];
+        const preview = $('#featured_image_preview');
+        const allowedExtensions = ['png', 'jpeg', 'jpg'];
+
+        if (file) {
+            const fileExtension = file.name.split('.').pop().toLowerCase();
+
+            if (!allowedExtensions.includes(fileExtension)) {
+                alert('Invalid file type! Please upload a PNG or JPG file.');
+                $(this).val(''); // Clear the input
+                preview.hide(); // Hide the preview
+                return;
+            }
+
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                preview.attr('src', e.target.result).show(); // Set the image and show the preview
+            };
+
+            reader.readAsDataURL(file);
+        } else {
+            preview.hide(); // Hide the preview if no file is selected
+        }
+    });
+
+    $('#addPostForm').on('submit', function(e){
+        e.preventDefault();
+        var form = this;
+        var formdata = new FormData(form);
+
+        $.ajax({    
+            url:$(form).attr('action'),
+            method:$(form).attr('method'),
+            data: formdata,
+            processData:false,
+            dataType:'json',
+            contentType:false,
+            beforeSend:function(){
+                $(form).find('span.error-text').text(''); 
+            },
+            success:function(data){
+                if(data.status == 1){
+                    $(form)[0].reset();
+                    $('img#featured_image_preview').attr('src','');
+                    $('input[name="tags"]').tagsinput('removeAll');
+                    // $().notifa({
+                    //     vers:2,
+                    //     cssClass:'success',
+                    //     html:data.message,
+                    //     delay:2500
+                    // });
+                    swal.fire({
+                        title: data.message,
+                        icon: "success",
+                    });
+                }else{
+                    // $().notifa({
+                    //     vers:2,
+                    //     cssClass:'error',
+                    //     html:data.message,
+                    //     delay:2500
+                    // });
+                    swal.fire({
+                        title: data.message,
+                        icon: "error",
+                    });
+                }
+            },
+            error:function(data){
+                $.each(data.responseJSON.errors, function(prefix, val){
+                    $(form).find('span.'+ prefix +'_error').text(val[0]);
+                });
+            }
+        });
+    });
+
+    
+
+
+
+</script>
+@endpush
