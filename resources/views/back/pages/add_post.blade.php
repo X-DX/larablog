@@ -38,7 +38,7 @@
                     </div>
                     <div class="form-group">
                         <label for=""><b>Content</b>:</label>
-                        <textarea name="content" id="" cols="30" rows="10" class="form-control" placeholder="Enter post content here..."></textarea>
+                        <textarea name="content" id="content" cols="30" rows="10" class="ckeditor form-control" placeholder="Enter post content here..."></textarea>
                         <span class="text-danger error-text content_error"></span>
                     </div>
                 </div>
@@ -114,6 +114,7 @@
 
 @push('script')
 <script src="/back/src/plugins/bootstrap-tagsinput/bootstrap-tagsinput.js"></script>
+<script src="/ckeditor/ckeditor.js"></script>
 <script>
     // Logo preview and ajax
     $('input[type="file"][name="featured_image"]').on('change', function () {
@@ -146,7 +147,9 @@
     $('#addPostForm').on('submit', function(e){
         e.preventDefault();
         var form = this;
+        var content = CKEDITOR.instances.content.getData();
         var formdata = new FormData(form);
+            formdata.append('content',content);
 
         $.ajax({    
             url:$(form).attr('action'),
@@ -161,25 +164,14 @@
             success:function(data){
                 if(data.status == 1){
                     $(form)[0].reset();
+                    CKEDITOR.instances.content.setData('');
                     $('img#featured_image_preview').attr('src','');
                     $('input[name="tags"]').tagsinput('removeAll');
-                    // $().notifa({
-                    //     vers:2,
-                    //     cssClass:'success',
-                    //     html:data.message,
-                    //     delay:2500
-                    // });
                     swal.fire({
                         title: data.message,
                         icon: "success",
                     });
                 }else{
-                    // $().notifa({
-                    //     vers:2,
-                    //     cssClass:'error',
-                    //     html:data.message,
-                    //     delay:2500
-                    // });
                     swal.fire({
                         title: data.message,
                         icon: "error",

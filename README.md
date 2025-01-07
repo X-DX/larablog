@@ -111,3 +111,9 @@
     Resize image (Learn how to create resized images and generate thumbnails automatically from the post's featured image when creating a new post. We use the powerful Laravel Image Intervention package to ensure images are optimized for faster loading and improved user experience.)
     - Create Thumbnail
     - make logic in controller for resize image
+
+## step 25
+    Integrate CKEditor 4
+    - download ckEditor 4, full package (in public folder)
+    - add css and js link (make changes in html add class and id)
+    - update ajax script for form data submission
