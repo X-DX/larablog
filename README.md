@@ -117,3 +117,8 @@
     - download ckEditor 4, full package (in public folder)
     - add css and js link (make changes in html add class and id)
     - update ajax script for form data submission
+    - Integrating elFinder File Manager with CKEditor (https://github.com/barryvdh/laravel-elfinder)
+        - composer require barryvdh/laravel-elfinder
+        - php artisan elfinder:publish
+        - php artisan vendor:publish --provider='Barryvdh\Elfinder\ElfinderServiceProvider' --tag=config
+        - php artisan vendor:publish --provider='Barryvdh\Elfinder\ElfinderServiceProvider' --tag=views
