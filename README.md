@@ -122,3 +122,12 @@
         - php artisan elfinder:publish
         - php artisan vendor:publish --provider='Barryvdh\Elfinder\ElfinderServiceProvider' --tag=config
         - php artisan vendor:publish --provider='Barryvdh\Elfinder\ElfinderServiceProvider' --tag=views
+
+## step 26
+    Post CRUD Display Posts
+    - add method allPosts() inside the PostController
+    - designe the all posts page
+    - create a live component of post
+    - make changes in view and controller of livewire
+    - show data in view page
+    - make a relationship inside a post model to help to show author and category

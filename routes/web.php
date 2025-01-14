@@ -48,7 +48,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
     Route::controller(PostController::class)->group(function(){
         Route::get('/post/new','addPost')->name('add_post');
         Route::post('/post/create','createPost')->name('create_post');
-        Route::get('/posts','allpost')->name('posts');
+        Route::get('/posts','allposts')->name('posts');
     });
 
 });

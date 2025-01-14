@@ -46,7 +46,7 @@ class PostController extends Controller
             'title' => 'required|unique:posts,title',
             'content' => 'required',
             'category' => 'required|exists:categories,id',
-            'featured_image' => 'required|mimes:png,jpg, jpeg|max:1024'
+            'featured_image' => 'required|mimes:png,jpg,jpeg|max:1024'
         ]);
 
         // Create Post
@@ -85,7 +85,7 @@ class PostController extends Controller
                 $post->category = $request->category;
                 $post->title = $request->title;
                 $post->content = $request->content;
-                $post->featured_image = $request->featured_image;
+                $post->featured_image = $new_filename;
                 $post->tags = $request->tags;
                 $post->meta_keywords = $request->meta_keywords;
                 $post->meta_description = $request->meta_description;
@@ -101,5 +101,12 @@ class PostController extends Controller
                 return response()->json(['status'=>0, 'message'=>'Something went wrong on uploading a featured image']);
             }
         }
+    }
+
+    public function allPosts(Request $request){
+        $data = [
+            'pageTitles' => 'Posts'
+        ];
+        return view('back.pages.posts',$data);
     }
 }
