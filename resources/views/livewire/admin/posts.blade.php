@@ -1,8 +1,59 @@
 <div>
     <div class="pd-20 card-box mb-30">
-        <div class="clearfix mb-20">
-            <div class="pull-left">
-                <h4 class="text-blue h4">Filters here..</h4>
+        <div class="row clearfix mb-20">
+            {{-- <div class="pull-left"> --}}
+                {{-- <h4 class="text-blue h4">Filters here..</h4> --}}
+                <div class="col-md-4">
+                    <label for="search">
+                        <b class="text-secondary">Search</b>:
+                    </label>
+                    <input type="text" id="search" class="form-control" placeholder="Search posts...">
+                </div>
+            {{-- </div> --}}
+            @if (auth()->user()->type == "superAdmin")
+                <div class="col-md-2">
+                    <label for="author">
+                        <b class="text-secondary">Author</b>:
+                    </label>
+                    <select name="" id="author" class="custom-select form-control">
+                        <option value="">No Select</option>
+                        <option value="">Author 1</option>
+                        <option value="">Author 2</option>
+                    </select>
+                </div>
+            @endif
+
+            <div class="col-md-2">
+                <label for="category">
+                    <b class="text-secondary">Category</b>:
+                </label>
+                <select name="" id="category" class="custom-select form-control">
+                    <option value="">No Select</option>
+                    <option value="">Category 1</option>
+                    <option value="">Category 2</option>
+                </select>
+            </div>
+
+            <div class="col-md-2">
+                <label for="visibility">
+                    <b class="text-secondary">Visibility</b>:
+                </label>
+                <select name="" id="visibility" class="custom-select form-control">
+                    <option value="">No Select</option>
+                    <option value="public">Public</option>
+                    <option value="private">Private</option>
+                </select>
+            </div>
+
+            <div class="col-md-2">
+                <label for="sort">
+                    <b class="text-secondary">Sort</b>:
+                </label>
+                <select name="" id="sort" class="custom-select form-control">
+                    <option value="">No Select</option>
+                    <option value="asc">ASC</option>
+                    <option value="desc">DESC</option>
+                </select>
             </div>
             
         </div>
