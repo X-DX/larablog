@@ -137,4 +137,6 @@
     - make filter designe in view file
     - open user model add post relationship for Author filter
     - open category model add post relationship for category filter
-    - 
+    - define a filter properties in livewire posts.php
+    - implement the search functionality for post
+    - add search() in post model

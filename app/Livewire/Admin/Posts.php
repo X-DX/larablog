@@ -14,6 +14,12 @@ class Posts extends Component
     public $perPage = 2;
     public $categories_html;
 
+    public $search = null;
+    public $author = null;
+    public $category = null;
+    public $visibility = null;
+    public $sortBy = 'desc';
+
     public function mount(){
         // prepare category selection
         $categories_html = '';
@@ -25,10 +31,10 @@ class Posts extends Component
 
         if(count($pcategories) > 0){
             foreach($pcategories as $item){
-                $categories_html.='<optgroup label="'.$item->name.'>';
+                $categories_html .='<optgroup label="' .$item->name .'">';
                 foreach($item->children as $category){
                     if($category->posts->count() > 0){
-                        $categories_html.='<option value="'.$category->id.'">'.$category->name.'</option>';
+                        $categories_html .='<option value="' .$category->id.'">' .$category->name .'</option>';
                     }
                 }
                 $categories_html.='</optgroup>';
@@ -46,8 +52,10 @@ class Posts extends Component
     {
         return view('livewire.admin.posts',[
             'posts' => auth()->user()->type == "superAdmin" ? 
-                        Post::paginate($this->perPage) : 
-                        Post::where('author_id',auth()->id())->paginate($this->perPage)
+                        Post::search(trim($this->search))
+                        ->paginate($this->perPage) : 
+                        Post::search(trim($this->search))
+                        ->where('author_id',auth()->id())->paginate($this->perPage)
         ]);
     }
 }

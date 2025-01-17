@@ -7,7 +7,7 @@
                     <label for="search">
                         <b class="text-secondary">Search</b>:
                     </label>
-                    <input type="text" id="search" class="form-control" placeholder="Search posts...">
+                    <input wire:model.live="search" type="text" id="search" class="form-control" placeholder="Search posts...">
                 </div>
             {{-- </div> --}}
             @if (auth()->user()->type == "superAdmin")
@@ -15,7 +15,7 @@
                     <label for="author">
                         <b class="text-secondary">Author</b>:
                     </label>
-                    <select name="" id="author" class="custom-select form-control">
+                    <select wire:model.live="author" name="" id="author" class="custom-select form-control">
                         <option value="">No Select</option>
                         @foreach(App\Models\User::whereHas('posts')->get() as $user)
                             <option value="{{ $user->id }}">{{ $user->name }}</option>
@@ -28,7 +28,7 @@
                 <label for="category">
                     <b class="text-secondary">Category</b>:
                 </label>
-                <select name="" id="category" class="custom-select form-control">
+                <select wire:model.live="category" name="" id="category" class="custom-select form-control">
                     <option value="">No Select</option>
                     {!! $categories_html !!}
                 </select>
@@ -38,7 +38,7 @@
                 <label for="visibility">
                     <b class="text-secondary">Visibility</b>:
                 </label>
-                <select name="" id="visibility" class="custom-select form-control">
+                <select wire:model.live="visibility" name="" id="visibility" class="custom-select form-control">
                     <option value="">No Select</option>
                     <option value="public">Public</option>
                     <option value="private">Private</option>
@@ -49,7 +49,7 @@
                 <label for="sort">
                     <b class="text-secondary">Sort</b>:
                 </label>
-                <select name="" id="sort" class="custom-select form-control">
+                <select wire:model.live="sortBy" name="" id="sort" class="custom-select form-control">
                     <option value="">No Select</option>
                     <option value="asc">ASC</option>
                     <option value="desc">DESC</option>
