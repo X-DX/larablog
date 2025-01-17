@@ -17,8 +17,9 @@
                     </label>
                     <select name="" id="author" class="custom-select form-control">
                         <option value="">No Select</option>
-                        <option value="">Author 1</option>
-                        <option value="">Author 2</option>
+                        @foreach(App\Models\User::whereHas('posts')->get() as $user)
+                            <option value="{{ $user->id }}">{{ $user->name }}</option>
+                        @endforeach
                     </select>
                 </div>
             @endif
@@ -29,8 +30,7 @@
                 </label>
                 <select name="" id="category" class="custom-select form-control">
                     <option value="">No Select</option>
-                    <option value="">Category 1</option>
-                    <option value="">Category 2</option>
+                    {!! $categories_html !!}
                 </select>
             </div>
 

@@ -135,4 +135,6 @@
 ## Step 27
     Build a Real-Time Advanced Search Filter and Sort 
     - make filter designe in view file
-    - open user model add post relationship
+    - open user model add post relationship for Author filter
+    - open category model add post relationship for category filter
+    - 
