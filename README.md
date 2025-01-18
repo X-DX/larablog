@@ -142,4 +142,10 @@
     - add search() in post model
     - reload the page still have to remain keyword in search box
     - reset the page when the search value is updated
-    - same for author filter
+    - same for author, category, visibility and sort by filter.
+
+## Step 28
+    Edit & Update Post with AJAX + Featured Image Update
+    - make a route for get and post action
+    - provide href in view.
+    - add editPost() in PostController

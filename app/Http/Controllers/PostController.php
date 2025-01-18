@@ -109,4 +109,37 @@ class PostController extends Controller
         ];
         return view('back.pages.posts',$data);
     }
+
+    public function editPost(Request $request, $id = null){
+        $post = Post::findOrFail($id);
+
+        $categories_html = '';
+        $pcategories = ParentCategory::whereHas('children')->orderBy('name','asc')->get();
+        $categories = Category::where('parent',0)->orderBy('name','asc')->get();
+
+        if(count($pcategories) > 0 ){
+            foreach($pcategories as $item){
+                $categories_html .= '<optgroup label="'.$iem->name.'">';
+                foreach($item->children as $category){
+                    $selected = $category->id == $post->category ? 'Selected' : '';
+                    $categories_html .= '<option value="'.$category->id.'" '.$selected.'>'.$category->name.'</option>';
+                }
+                $categories_html .= '</optgroup>';
+            }
+        }
+
+        if(count($categories) > 0 ){
+            foreach($categories as $item){
+                $selected = $item->id == $post->category ? 'selected' : '';
+                $categories_html .='<option value="'.$item->id.'" '.$selected.'>'.$item->name.'</option>';
+            }
+        }
+
+        $data = [
+            'pageTitles' => 'Edit',
+            'post' => $post,
+            'categories_html' => $categories_html 
+        ];
+        return view('back.pages.edit_post',$data);
+    }
 }
