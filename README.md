@@ -140,3 +140,6 @@
     - define a filter properties in livewire posts.php
     - implement the search functionality for post
     - add search() in post model
+    - reload the page still have to remain keyword in search box
+    - reset the page when the search value is updated
+    - same for author filter
