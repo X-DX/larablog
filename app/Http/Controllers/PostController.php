@@ -119,7 +119,7 @@ class PostController extends Controller
 
         if(count($pcategories) > 0 ){
             foreach($pcategories as $item){
-                $categories_html .= '<optgroup label="'.$iem->name.'">';
+                $categories_html .= '<optgroup label="'.$item->name.'">';
                 foreach($item->children as $category){
                     $selected = $category->id == $post->category ? 'Selected' : '';
                     $categories_html .= '<option value="'.$category->id.'" '.$selected.'>'.$category->name.'</option>';
@@ -141,5 +141,83 @@ class PostController extends Controller
             'categories_html' => $categories_html 
         ];
         return view('back.pages.edit_post',$data);
+    }
+
+    public function updatePost(Request $request){
+        $post = Post::findOrFail($request->post_id);
+        $featured_image_name = $post->featured_image;
+
+        // validate form
+        $request->validate([
+            'title' => 'required|unique:posts,title,'.$post->id,
+            'content' => 'required',
+            'category' => 'required|exists:categories,id',
+            'featured_image' => 'nullable|mimes:jpeg,jpg,png|max:1024'
+        ]);
+
+        if( $request->hasFile('featured_image') ){
+            $old_featured_image = $post->featured_image;
+            $path = 'images/posts/';
+            $file = $request->file('featured_image');
+            $filename = $file->getClientOriginalName();
+            $new_filename = time().'_'.$filename;
+
+            // upload new featured image
+            $upload = $file->move(public_path($path),$new_filename);
+
+            if($upload){
+                /** Generate resized image and thumbnail **/ 
+                $resized_path = $path.'resized/';
+
+                //image thumbnail (Aspect ration: 1)
+                Image::make($path.$new_filename)
+                    ->fit(250,250)
+                    ->save($resized_path.'thumb'.$new_filename);
+
+                //Resized Image (Aspect ration: 1.6)
+                Image::make($path.$new_filename)
+                    ->fit(512,320)
+                    ->save($resized_path.'thumb'.$new_filename);
+
+                // Delete old featured image
+                if( $old_featured_image != null && File::exists(public_path($path.$old_featured_image)) ){
+                    File::delete(public_path($path.$old_featured_image));
+
+                    // delete resized image
+                    if( File::exists(public_path($resized_path.'resized_'.$old_featured_image))){
+                        File::delete(public_path($resized_path.'resized_'.$old_featured_image));
+                    }
+
+                    // delete thumbnail
+                    if(File::exists(public_path($resized_path.'thumb_'.$old_featured_image))){
+                        File::delete(public_path($resized_path.'thumb_'.$old_featured_image));
+                    }
+                }   
+
+                $featured_image_name = $new_filename;
+
+            }else{
+                return response()->json(['status'=>0,'message'=>'Something went wrong while uploading featured image.']);
+            }
+        }
+
+        // update post in database
+        $post->author_id = auth()->id();
+        $post->category = $request->category;
+        $post->title = $request->title;
+        $post->slug = null;
+        $post->content = $request->content;
+        $post->featured_image = $featured_image_name;
+        $post->tags = $request->tags;
+        $post->meta_keywords = $request->meta_keywords;
+        $post->meta_description = $request->meta_description;
+        $post->visibility = $request->visibility;
+        $saved = $post->save();
+
+        if($saved){
+            return response()->json(['status'=>1,'message'=>'Blog post has been successfully updated.']);
+        }else{
+            return response()->json(['status'=>0,'message'=>'Something went wrong while updating a post.']);
+        }
     }
 }

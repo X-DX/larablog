@@ -149,3 +149,6 @@
     - make a route for get and post action
     - provide href in view.
     - add editPost() in PostController
+    - add view edit_post and make changes
+    - add updatePost() in  PostController
+    - 
